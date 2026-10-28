@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AikoTouch – Tu celebración</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Italiana&amp;family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#000000}
+a{color:#C0C0C0}a:hover{color:#FFFFFF}
+input,select{color-scheme:dark}
+input::placeholder{color:#7A8194}
+input:focus,button:focus-visible,a:focus-visible{outline:2px solid #C0C0C0;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #000000; color: #E8E8E8; font-family: 'Jost', 'Helvetica Neue', Arial, sans-serif; font-weight: 300; display: flex; flex-direction: column">
+<div style="flex: 1; width: 100%; max-width: 1080px; margin: 0 auto; padding: 18px 20px 14px; box-sizing: border-box; display: flex; flex-direction: column">
+
+<header style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; align-items: center; gap: 10px">
+<div style="width: 40px; height: 40px; border-radius: 50%; background: #000000; border: 1px solid #5A5F6B; display: flex; align-items: center; justify-content: center; font-family: 'Italiana', Georgia, serif; font-size: 22px; color: #C0C0C0">A</div>
+<span style="font-family: 'Italiana', Georgia, serif; font-size: 22px; letter-spacing: 0.04em; color: #E8E8E8">AikoTouch</span>
+</div>
+<div style="display: flex; border: 1px solid #3A3F4D; border-radius: 999px; padding: 3px; gap: 2px" aria-label="Idioma">
+<button onClick="{{setEs}}" style="min-width: 48px; height: 38px; border: 0; border-radius: 999px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; background: {{esBg}}; color: {{esFg}}">ES</button>
+<button onClick="{{setIt}}" style="min-width: 48px; height: 38px; border: 0; border-radius: 999px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; background: {{itBg}}; color: {{itFg}}">IT</button>
+</div>
+</header>
+
+<sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
+<main style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px 0; gap: 26px">
+<h1 style="margin: 0; font-family: 'Italiana', Georgia, serif; font-weight: 400; font-size: clamp(42px, 7vw, 82px); line-height: 1.02; color: #D6D6D6">{{t.tag}}</h1>
+<p style="margin: 0; font-size: clamp(16px, 2vw, 19px); line-height: 1.55; color: #BFC3CC; max-width: 36rem">{{t.lead}}</p>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 28px; max-width: 52rem">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="3">
+<li style="flex: 1 1 200px; display: flex; gap: 12px; align-items: baseline; text-align: left; border-top: 1px solid #22262F; padding-top: 10px">
+<span style="font-family: 'Italiana', Georgia, serif; font-size: 26px; color: #C0C0C0; min-width: 18px">{{s.n}}</span>
+<div>
+<div style="font-size: 16px; font-weight: 500; color: #F0F0F0">{{s.title}}</div>
+<div style="font-size: 14px; line-height: 1.4; color: #A3A8B4; margin-top: 2px">{{s.desc}}</div>
+</div>
+</li>
+</sc-for>
+</ol>
+<button onClick="{{openForm}}" style="height: 56px; padding: 0 34px; border: 0; border-radius: 999px; background: #C0C0C0; color: #000000; font-family: 'Jost', sans-serif; font-size: 17px; font-weight: 500; letter-spacing: 0.02em; cursor: pointer">{{t.open}}</button>
+</main>
+</sc-if>
+
+<sc-if value="{{isForm}}" hint-placeholder-val="{{ false }}">
+<main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px 0">
+<div style="width: 100%; max-width: 560px; background: #0A0F1C; border: 1px solid #1E2638; border-radius: 20px; padding: 18px 18px 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 8px">
+<button onClick="{{goHome}}" aria-label="{{t.back}}" style="width: 44px; height: 44px; margin-left: -8px; border: 0; background: transparent; color: #C0C0C0; cursor: pointer; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+</button>
+<h2 style="margin: 0; font-family: 'Italiana', Georgia, serif; font-weight: 400; font-size: 26px; color: #E8E8E8">{{t.formTitle}}</h2>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{events}}" as="ev" hint-placeholder-count="7">
+<button onClick="{{ev.pick}}" style="height: 40px; padding: 0 13px; border-radius: 999px; border: 1px solid {{ev.bd}}; background: {{ev.bg}}; color: {{ev.fg}}; font-family: 'Jost', sans-serif; font-size: 14px; cursor: pointer">{{ev.label}}</button>
+</sc-for>
+</div>
+<sc-if value="{{isOther}}" hint-placeholder-val="{{ false }}">
+<input type="text" aria-label="{{t.otherPh}}" placeholder="{{t.otherPh}}" style="height: 44px; padding: 0 12px; background: #050810; border: 1px solid #2A3245; border-radius: 10px; color: #F0F0F0; font-family: 'Jost', sans-serif; font-size: 16px">
+</sc-if>
+
+<input type="text" aria-label="{{t.names}}" placeholder="{{t.names}}" style="height: 44px; background: #050810; border: 1px solid #2A3245; border-radius: 10px; padding: 0 12px; color: #F0F0F0; font-family: 'Jost', sans-serif; font-size: 16px">
+
+<label style="display: flex; align-items: center; height: 44px; background: #050810; border: 1px solid #2A3245; border-radius: 10px; overflow: hidden">
+<span style="padding: 0 12px; color: #A8ADB8; font-size: 15px; white-space: nowrap">{{t.date}}</span>
+<input type="date" style="flex: 1; min-width: 0; height: 100%; padding: 0 10px; background: transparent; border: 0; color: #F0F0F0; font-family: 'Jost', sans-serif; font-size: 16px">
+</label>
+
+<input type="text" autocomplete="name" aria-label="{{t.you}}" placeholder="{{t.you}}" style="height: 44px; background: #050810; border: 1px solid #2A3245; border-radius: 10px; padding: 0 12px; color: #F0F0F0; font-family: 'Jost', sans-serif; font-size: 16px">
+
+<div style="display: flex; height: 44px; background: #050810; border: 1px solid #2A3245; border-radius: 10px; overflow: hidden">
+<select value="{{cc}}" onChange="{{setCc}}" aria-label="{{t.ccLabel}}" style="flex: none; height: 100%; padding: 0 6px 0 10px; background: #0E1424; border: 0; border-right: 1px solid #2A3245; color: #C0C0C0; font-family: 'Jost', sans-serif; font-size: 15px; cursor: pointer">
+<option value="+52">MX +52</option>
+<option value="+39">IT +39</option>
+<option value="+1">US +1</option>
+<option value="+34">ES +34</option>
+<option value="+57">CO +57</option>
+<option value="+54">AR +54</option>
+<option value="other">{{t.ccOther}}</option>
+</select>
+<sc-if value="{{isCcOther}}" hint-placeholder-val="{{ false }}">
+<input type="tel" aria-label="{{t.ccLabel}}" placeholder="+00" style="flex: none; width: 64px; padding: 0 8px; background: transparent; border: 0; border-right: 1px solid #2A3245; color: #F0F0F0; font-family: 'Jost', sans-serif; font-size: 16px">
+</sc-if>
+<input type="tel" autocomplete="tel-national" aria-label="{{t.phone}}" placeholder="{{t.phone}}" style="flex: 1; min-width: 0; padding: 0 12px; background: transparent; border: 0; color: #F0F0F0; font-family: 'Jost', sans-serif; font-size: 16px">
+</div>
+
+<input type="email" autocomplete="email" aria-label="{{t.email}}" placeholder="{{t.email}}" style="height: 44px; background: #050810; border: 1px solid #2A3245; border-radius: 10px; padding: 0 12px; color: #F0F0F0; font-family: 'Jost', sans-serif; font-size: 16px">
+
+<label style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #D0D3DA; cursor: pointer; min-height: 44px">
+<input type="checkbox" checked="{{privacy}}" onChange="{{togglePrivacy}}" style="width: 20px; height: 20px; accent-color: #C0C0C0; margin: 0; flex: none">
+<span>{{t.privacy}} <a href="#privacidad">{{t.privLink}}</a></span>
+</label>
+<sc-if value="{{privErr}}" hint-placeholder-val="{{ false }}">
+<div style="font-size: 13px; color: #F2B8A0; margin-top: -6px">{{t.privErr}}</div>
+</sc-if>
+
+<button onClick="{{submit}}" style="height: 52px; border: 0; border-radius: 999px; background: #C0C0C0; color: #000000; font-family: 'Jost', sans-serif; font-size: 17px; font-weight: 500; cursor: pointer">{{t.cta}}</button>
+</div>
+</main>
+</sc-if>
+
+<sc-if value="{{isPay}}" hint-placeholder-val="{{ false }}">
+<main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px 0">
+<div style="width: 100%; max-width: 480px; background: #0A0F1C; border: 1px solid #1E2638; border-radius: 20px; padding: 18px 20px 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 8px">
+<button onClick="{{openForm}}" aria-label="{{t.back}}" style="width: 44px; height: 44px; margin-left: -8px; border: 0; background: transparent; color: #C0C0C0; cursor: pointer; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+</button>
+<h2 style="margin: 0; font-family: 'Italiana', Georgia, serif; font-weight: 400; font-size: 26px; color: #E8E8E8">{{t.payTitle}}</h2>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 16px; color: #D0D3DA; border-bottom: 1px solid #1E2638; padding-bottom: 12px">
+<span>AikoTouch · {{evLabel}}</span>
+<span style="color: #F0F0F0; font-weight: 500">{{t.price}}</span>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #BFC3CC">{{t.payInfo}}</p>
+<button onClick="{{pay}}" style="height: 52px; border: 0; border-radius: 999px; background: #C0C0C0; color: #000000; font-family: 'Jost', sans-serif; font-size: 17px; font-weight: 500; cursor: pointer">{{t.payCta}}</button>
+<div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; color: #A3A8B4">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+<span>{{t.secure}}</span>
+</div>
+</div>
+</main>
+</sc-if>
+
+<sc-if value="{{isDone}}" hint-placeholder-val="{{ false }}">
+<main style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px 0">
+<div style="width: 64px; height: 64px; border-radius: 50%; border: 1px solid #C0C0C0; display: flex; align-items: center; justify-content: center">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C0C0C0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+</div>
+<h2 style="margin: 22px 0 0; font-family: 'Italiana', Georgia, serif; font-weight: 400; font-size: 38px; color: #E8E8E8">{{t.doneT}}</h2>
+<p style="margin: 10px 0 0; font-size: 16px; line-height: 1.6; color: #BFC3CC; max-width: 24rem">{{t.doneD}}</p>
+<button onClick="{{goHome}}" style="margin-top: 26px; height: 46px; padding: 0 22px; background: transparent; color: #E8E8E8; border: 1px solid #3A3F4D; border-radius: 999px; font-family: 'Jost', sans-serif; font-size: 15px; cursor: pointer">{{t.home}}</button>
+</main>
+</sc-if>
+
+<footer id="privacidad" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 16px; font-size: 13px; color: #A3A8B4; border-top: 1px solid #1A1D25; padding-top: 6px">
+<a href="https://wa.me/393385927654" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: none">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>
+<span>{{t.help}}</span>
+</a>
+<div style="display: flex; align-items: center; gap: 16px">
+<a href="#privacidad">{{t.privLink}}</a>
+<span>© 2026 AikoTouch</span>
+</div>
+</footer>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { lang: "es", view: "home", ev: "xv", cc: null, privacy: false, privErr: false };
+  }
+  renderVals() {
+    var T = {
+      es: {
+        tag: "Cada toque, una emoción",
+        lead: "Tus invitados comparten fotos, videos y dedicatorias de tu gran día, todo en un solo lugar. Después creas un video con los mejores momentos y lo envías a todos tus invitados.",
+        steps: [["Solicítalo", "Déjanos los datos de tu celebración."], ["Recibe tu QR", "Imprímelo para las mesas o la invitación."], ["Comparten y recuerdan", "Fotos, videos y un video final para todos."]],
+        ev: { xv: "XV años", boda: "Boda", bautizo: "Bautizo", comunion: "Primera Comunión", cumple: "Cumpleaños", d18: "18 años", otro: "Otro" },
+        open: "Solicitar información",
+        back: "Volver",
+        formTitle: "Tu celebración",
+        otherPh: "¿Qué celebras?",
+        names: "Nombre(s) de los festejados",
+        date: "Fecha del evento",
+        phone: "Teléfono (WhatsApp)",
+        ccLabel: "Código de país",
+        ccOther: "Otro país",
+        you: "Tu nombre",
+        email: "Correo electrónico",
+        privacy: "Acepto el",
+        privLink: "Aviso de privacidad",
+        privErr: "Para continuar, acepta el aviso de privacidad.",
+        cta: "Continuar al pago",
+        payTitle: "Pago",
+        price: "$ — MXN",
+        payInfo: "Después del pago, en un máximo de 24 horas recibirás por correo y WhatsApp el enlace de tu app, con el código QR para imprimir y compartir con tus invitados.",
+        payCta: "Pagar ahora",
+        secure: "Pago seguro",
+        doneT: "¡Pago recibido!",
+        doneD: "Gracias. En un máximo de 24 horas recibirás por correo y WhatsApp el enlace de tu app con el código QR para imprimir.",
+        home: "Volver al inicio",
+        help: "¿Dudas? Escríbenos por WhatsApp"
+      },
+      it: {
+        tag: "Ogni tocco, un’emozione",
+        lead: "I tuoi invitati condividono foto, video e dediche del tuo giorno speciale, tutto in un unico posto. Poi crei un video con i momenti più belli e lo invii a tutti i tuoi invitati.",
+        steps: [["Richiedilo", "Lasciaci i dati della tua festa."], ["Ricevi il tuo QR", "Stampalo per i tavoli o l’invito."], ["Condividono e ricordano", "Foto, video e un video finale per tutti."]],
+        ev: { xv: "Quinceañera", boda: "Matrimonio", bautizo: "Battesimo", comunion: "Prima Comunione", cumple: "Compleanno", d18: "18 anni", otro: "Altro" },
+        open: "Richiedi informazioni",
+        back: "Indietro",
+        formTitle: "La tua festa",
+        otherPh: "Cosa festeggi?",
+        names: "Nome o nomi dei festeggiati",
+        date: "Data dell’evento",
+        phone: "Telefono (WhatsApp)",
+        ccLabel: "Prefisso internazionale",
+        ccOther: "Altro paese",
+        you: "Il tuo nome",
+        email: "Email",
+        privacy: "Accetto l’",
+        privLink: "Informativa privacy",
+        privErr: "Per continuare, accetta l’informativa privacy.",
+        cta: "Continua al pagamento",
+        payTitle: "Pagamento",
+        price: "€ —",
+        payInfo: "Dopo il pagamento, entro 24 ore riceverai via email e WhatsApp il link della tua app, con il QR code da stampare e condividere con i tuoi invitati.",
+        payCta: "Paga ora",
+        secure: "Pagamento sicuro",
+        doneT: "Pagamento ricevuto!",
+        doneD: "Grazie. Entro 24 ore riceverai via email e WhatsApp il link della tua app con il QR code da stampare.",
+        home: "Torna all’inizio",
+        help: "Dubbi? Scrivici su WhatsApp"
+      }
+    };
+    var self = this;
+    var lang = this.state.lang;
+    var t = T[lang];
+    var keys = ["xv", "boda", "bautizo", "comunion", "cumple", "d18", "otro"];
+    var events = keys.map(function (k) {
+      var on = self.state.ev === k;
+      return {
+        label: t.ev[k],
+        bg: on ? "#C0C0C0" : "transparent",
+        fg: on ? "#000000" : "#E8E8E8",
+        bd: on ? "#C0C0C0" : "#3A3F4D",
+        pick: function () { self.setState({ ev: k }); }
+      };
+    });
+    var steps = t.steps.map(function (s, i) { return { n: String(i + 1), title: s[0], desc: s[1] }; });
+    var v = this.state.view;
+    return {
+      t: t,
+      steps: steps,
+      events: events,
+      isHome: v === "home",
+      isForm: v === "form",
+      isPay: v === "pay",
+      isDone: v === "done",
+      evLabel: t.ev[this.state.ev],
+      cc: this.state.cc || (lang === "it" ? "+39" : "+52"),
+      isCcOther: this.state.cc === "other",
+      setCc: function (e) { self.setState({ cc: e.target.value }); },
+      pay: function () { self.setState({ view: "done" }); },
+      isOther: this.state.ev === "otro",
+      privacy: this.state.privacy,
+      privErr: this.state.privErr,
+      esBg: lang === "es" ? "#C0C0C0" : "transparent",
+      esFg: lang === "es" ? "#000000" : "#C0C0C0",
+      itBg: lang === "it" ? "#C0C0C0" : "transparent",
+      itFg: lang === "it" ? "#000000" : "#C0C0C0",
+      setEs: function () { self.setState({ lang: "es" }); },
+      setIt: function () { self.setState({ lang: "it" }); },
+      openForm: function () { self.setState({ view: "form" }); },
+      goHome: function () { self.setState({ view: "home", privacy: false, privErr: false }); },
+      togglePrivacy: function () { self.setState({ privacy: !self.state.privacy, privErr: false }); },
+      submit: function () {
+        if (!self.state.privacy) { self.setState({ privErr: true }); return; }
+        self.setState({ view: "pay" });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

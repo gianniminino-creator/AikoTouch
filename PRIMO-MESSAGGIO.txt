@@ -1,0 +1,1 @@
+Ciao! Nella cartella "consegna-landing" del progetto trovi BRIEF-LANDING.md e landing-prototipo.html. Leggi prima il brief e segui le sue regole. Cominciamo dal punto 1: guarda come è organizzato il progetto e spiegami in parole semplici su quali indirizzi stanno oggi le app. Non modificare ancora niente.
